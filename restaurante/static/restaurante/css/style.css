@@ -1,0 +1,592 @@
+/* Variables de color */
+:root {
+    --bg-dark: #1a1a1a;
+    --bg-darker: #0f0f0f;
+    --text-light: #ffffff;
+    --text-gray: #cccccc;
+    --accent-color: #d4af37;
+    --card-bg: #2a2a2a;
+    --border-color: #3a3a3a;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+/* Aplicar la fuente y peso a todos los elementos de texto */
+h1, h2, h3, h4, h5, h6,
+p, span, a, li, td, th,
+button, input, textarea, select,
+.plato-nombre, .plato-descripcion, .plato-precio,
+.categoria-titulo, .carousel-titulo, .welcome-text,
+.sidebar-header h3, .categorias-menu .menu-link {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 400;
+}
+
+/* Menú Hamburguesa */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-toggle:hover {
+    background: var(--bg-darker);
+    border-color: var(--accent-color);
+}
+
+.menu-toggle.active {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Menú Lateral */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--card-bg);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.sidebar-menu.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--accent-color);
+}
+
+.categorias-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categorias-menu li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.categorias-menu .menu-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.categorias-menu .menu-link:hover {
+    background: var(--bg-darker);
+    color: var(--accent-color);
+    padding-left: 2rem;
+}
+
+/* Overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding: 4rem 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+/* Hero Background solo en la sección del logo */
+.logo-container .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.logo-container .hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+}
+
+.logo-image,
+.welcome-text {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-image {
+    max-width: 250px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+}
+
+.welcome-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0.8rem 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8),
+                0 5px 15px rgba(0, 0, 0, 0.6),
+                0 2px 5px rgba(0, 0, 0, 0.4);
+    display: inline-block;
+    position: relative;
+}
+
+/* Carrusel de platos destacados */
+.carousel-section {
+    margin-bottom: 4rem;
+}
+
+.carousel-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+    text-align: center;
+    letter-spacing: 3px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel-inner {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.plato-card.featured {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.plato-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.plato-image-placeholder {
+    width: 100%;
+    height: 300px;
+    background: var(--bg-darker);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-gray);
+    font-size: 1.2rem;
+}
+
+.plato-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.plato-nombre {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.plato-descripcion {
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    display: block;
+    overflow: visible;
+    min-height: fit-content;
+}
+
+.plato-precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+/* Sección de categorías */
+.categorias-section {
+    margin-top: 3rem;
+}
+
+.categoria-container {
+    margin-bottom: 4rem;
+    scroll-margin-top: 80px;
+}
+
+.carousel-section {
+    scroll-margin-top: 80px;
+}
+
+.categoria-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+    text-align: center;
+    letter-spacing: 3px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+/* Grid de platos */
+.platos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.plato-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.plato-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.plato-card .plato-image {
+    height: 250px;
+}
+
+.plato-card .plato-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.plato-card .plato-nombre {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.plato-card .plato-descripcion {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    display: block;
+    overflow: visible;
+    min-height: fit-content;
+}
+
+.plato-card .plato-precio {
+    font-size: 1.3rem;
+    margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .logo-container {
+        min-height: 350px;
+        padding: 3rem 1.5rem;
+    }
+
+    .menu-toggle {
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .sidebar-menu {
+        width: 280px;
+    }
+
+    .menu-container {
+        padding: 1rem;
+    }
+
+    .logo-image {
+        max-width: 180px;
+        max-height: 180px;
+    }
+
+    .welcome-text {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+        padding: 0.7rem 1.3rem;
+    }
+
+    .plato-card.featured {
+        height: auto;
+        min-height: 450px;
+    }
+
+    .plato-card.featured .plato-image {
+        height: 250px;
+    }
+
+    .plato-card.featured .plato-info {
+        padding: 1.25rem;
+    }
+
+    .platos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .categoria-titulo {
+        font-size: 1.5rem;
+    }
+
+    .carousel-titulo {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-container {
+        min-height: 300px;
+        padding: 2rem 1rem;
+    }
+
+    .menu-toggle {
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar-menu {
+        width: 260px;
+    }
+
+    .sidebar-header {
+        padding: 1rem;
+    }
+
+    .sidebar-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .categorias-menu .menu-link {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+
+    .welcome-text {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        padding: 0.6rem 1rem;
+    }
+
+    .plato-card.featured {
+        height: auto;
+        min-height: 400px;
+    }
+
+    .plato-card.featured .plato-image {
+        height: 200px;
+    }
+
+    .plato-card.featured .plato-info {
+        padding: 1rem;
+    }
+
+    .plato-nombre {
+        font-size: 1.3rem;
+    }
+
+    .plato-descripcion {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        display: block;
+        overflow: visible;
+        max-height: none;
+    }
+
+    .plato-card .plato-image {
+        height: 200px;
+    }
+
+    .plato-card .plato-info {
+        padding: 1rem;
+    }
+
+    .plato-card .plato-descripcion {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        display: block;
+        overflow: visible;
+        max-height: none;
+    }
+}
+

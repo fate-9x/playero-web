@@ -1,0 +1,114 @@
+{% extends 'restaurante/base.html' %}
+{% load static %}
+
+{% block title %}Menú - El Playero Restaurant{% endblock %}
+
+{% block content %}
+<!-- Menú Hamburguesa -->
+<button class="menu-toggle" id="menuToggle" aria-label="Menú">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- Menú Lateral -->
+<nav class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+        <h3>Menú</h3>
+        <button class="close-menu" id="closeMenu" aria-label="Cerrar menú">&times;</button>
+    </div>
+    <ul class="categorias-menu">
+        {% if platos_destacados %}
+        <li><a href="#platos-preferidos" class="menu-link">Platos Preferidos</a></li>
+        {% endif %}
+        {% for categoria in categorias %}
+            {% if categoria.platos_disponibles %}
+            <li><a href="#categoria-{{ categoria.id }}" class="menu-link">{{ categoria.nombre }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+
+<!-- Overlay para cerrar el menú -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<div class="menu-container">
+    <!-- Logo -->
+    <div class="logo-container">
+        <div class="hero-background"></div>
+        <img src="{% static 'restaurante/images/logoPlayero.png' %}" alt="El Playero Restaurant" class="logo-image">
+        <p class="welcome-text">BIENVENIDO AL MEJOR RESTAURANT DE CARTAGENA</p>
+    </div>
+
+    <!-- Carrusel de Platos Destacados -->
+    {% if platos_destacados %}
+    <div class="carousel-section" id="platos-preferidos">
+        <h2 class="carousel-titulo">Platos Preferidos</h2>
+        <div id="platosCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for plato in platos_destacados %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="plato-card featured">
+                        {% if plato.imagen %}
+                        <img src="{{ plato.imagen.url }}" alt="{{ plato.nombre }}" class="plato-image">
+                        {% else %}
+                        <div class="plato-image-placeholder">
+                            <span>Sin imagen</span>
+                        </div>
+                        {% endif %}
+                        <div class="plato-info">
+                            <h3 class="plato-nombre">{{ plato.nombre }}</h3>
+                            {% if plato.precio %}
+                            <p class="plato-precio">${{ plato.precio|floatformat:0 }}</p>
+                            {% endif %}
+                            <p class="plato-descripcion">{{ plato.descripcion }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if platos_destacados|length > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#platosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#platosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Platos por Categoría -->
+    <div class="categorias-section">
+        {% for categoria in categorias %}
+            {% if categoria.platos_disponibles %}
+            <div class="categoria-container" id="categoria-{{ categoria.id }}">
+                <h2 class="categoria-titulo">{{ categoria.nombre|upper }}</h2>
+                <div class="platos-grid">
+                    {% for plato in categoria.platos_disponibles %}
+                    <div class="plato-card">
+                        {% if plato.imagen %}
+                        <img src="{{ plato.imagen.url }}" alt="{{ plato.nombre }}" class="plato-image">
+                        {% else %}
+                        <div class="plato-image-placeholder">
+                            <span>Sin imagen</span>
+                        </div>
+                        {% endif %}
+                        <div class="plato-info">
+                            <h3 class="plato-nombre">{{ plato.nombre }}</h3>
+                            <p class="plato-descripcion">{{ plato.descripcion }}</p>
+                            <p class="plato-precio">${{ plato.precio|floatformat:0 }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
