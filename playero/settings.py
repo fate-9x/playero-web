@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.23']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.24', '0.0.0.0', 'playero3.win', '*.playero3.win']
+CSRF_TRUSTED_ORIGINS = ['https://playero3.win', 'http://playero3.win', 'https://*.playero3.win']
 
 # Application definition
 
@@ -114,7 +114,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (uploads)
