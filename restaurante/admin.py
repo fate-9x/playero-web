@@ -17,3 +17,14 @@ class PlatoAdmin(admin.ModelAdmin):
     search_fields = ('nombre', 'descripcion')
     list_editable = ('disponible', 'destacado')
     ordering = ('categoria', 'nombre')
+    fieldsets = (
+        ('Información del Plato', {
+            'fields': ('nombre', 'descripcion', 'categoria', 'precio')
+        }),
+        ('Imagen', {
+            'fields': ('imagen',)
+        }),
+        ('Estado', {
+            'fields': ('disponible', 'destacado')
+        }),
+    )

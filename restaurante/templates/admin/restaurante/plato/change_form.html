@@ -1,0 +1,51 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="{% static 'restaurante/css/admin-preview.css' %}">
+{% endblock %}
+
+{% block field_sets %}
+    <div class="admin-preview-container">
+        <div class="admin-preview-section">
+            <h2>Vista Previa del Plato</h2>
+            <div class="preview-card-wrapper">
+                <div class="plato-card-preview" id="previewCard">
+                    <div class="plato-image-preview-container">
+                        <img id="previewImage" src="{% if original and original.imagen %}{{ original.imagen.url }}{% endif %}" alt="Vista previa" class="plato-image-preview" style="{% if not original or not original.imagen %}display: none;{% endif %}">
+                        <div class="plato-image-placeholder-preview" id="previewPlaceholder" style="{% if original and original.imagen %}display: none;{% else %}display: flex;{% endif %}">
+                            <span>Sin imagen</span>
+                        </div>
+                    </div>
+                    <div class="plato-info-preview">
+                        <h3 class="plato-nombre-preview" id="previewNombre">Nombre del Plato</h3>
+                        <p class="plato-descripcion-preview" id="previewDescripcion">Descripción del plato aparecerá aquí</p>
+                        <p class="plato-precio-preview" id="previewPrecio">$0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="image-cropper-section" id="cropperSection" style="display: none;">
+            <h3>Ajustar Imagen</h3>
+            <div class="cropper-container">
+                <img id="imageToCrop" src="" alt="Imagen a recortar">
+            </div>
+            <div class="cropper-controls">
+                <button type="button" id="applyCrop" class="button">Aplicar Recorte</button>
+                <button type="button" id="cancelCrop" class="button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    {{ block.super }}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="{% static 'restaurante/js/admin-preview.js' %}"></script>
+{% endblock %}
+
