@@ -4,7 +4,7 @@
 {% block extrahead %}
     {{ block.super }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <link rel="stylesheet" href="{% static 'restaurante/css/admin-preview.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/admin-preview.css' %}">
 {% endblock %}
 
 {% block field_sets %}
@@ -46,6 +46,6 @@
 {% block admin_change_form_document_ready %}
     {{ block.super }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="{% static 'restaurante/js/admin-preview.js' %}"></script>
+    <script src="{% static 'admin/js/admin-preview.js' %}"></script>
 {% endblock %}
 
