@@ -30,13 +30,13 @@ CSRF_TRUSTED_ORIGINS = ['https://playero3.win', 'http://playero3.win', 'https://
 # Application definition
 
 INSTALLED_APPS = [
+    'restaurante',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurante',
 ]
 
 MIDDLEWARE = [

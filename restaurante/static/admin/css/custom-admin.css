@@ -1,0 +1,93 @@
+/* Header superior con color personalizado */
+#header {
+    background: #08004A !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+/* Segunda barra donde está el título */
+#branding {
+    background: #08004A !important;
+    padding: 20px;
+}
+
+/* Logo y título en línea horizontal */
+#site-name {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo a la izquierda */
+.logo-admin {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    flex-direction: column;
+}
+
+/* Título en blanco */
+#site-name a {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #ffffff !important;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#site-name a:hover {
+    color: #e0e0e0 !important;
+}
+
+/* Botones del usuario mejorados */
+#user-tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
+    float: none !important;
+}
+
+#user-tools a,
+#user-tools form button {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    text-decoration: none;
+    background: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#user-tools a:hover,
+#user-tools form button:hover {
+    background: #ffffff;
+    color: #08004A !important;
+}
+
+/* Texto de bienvenida */
+#user-tools strong {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    margin-right: 5px;
+}
+
+/* Ajuste para el formulario de logout */
+#user-tools form {
+    margin: 0;
+    display: inline;
+}
+
+/* Separador entre enlaces */
+#user-tools span {
+    color: #ffffff;
+    margin: 0 5px;
+}

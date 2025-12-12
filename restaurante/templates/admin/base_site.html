@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if subtitle %}{{ subtitle }} | {% endif %}Panel Administración Playero 3
+{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'admin/css/custom-admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src="{% static 'admin/img/logo.png' %}" alt="Logo Playero 3" class="logo-admin">
+    </a>
+    <a href="{% url 'admin:index' %}">Panel Administración Playero 3</a>
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
