@@ -92,5 +92,25 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+    
+    // Formatear precios con separadores de miles (puntos)
+    function formatPrice(priceText) {
+        // Extraer el número del texto (remover el $ y espacios)
+        const match = priceText.match(/\d+/);
+        if (!match) return priceText;
+        
+        const number = parseInt(match[0]);
+        // Formatear con puntos como separadores de miles
+        const formatted = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        // Reemplazar el número original con el formateado
+        return priceText.replace(/\d+/, formatted);
+    }
+    
+    // Aplicar formato a todos los precios
+    const precioElements = document.querySelectorAll('.plato-precio');
+    precioElements.forEach(element => {
+        const originalText = element.textContent;
+        element.textContent = formatPrice(originalText);
+    });
 });
 
