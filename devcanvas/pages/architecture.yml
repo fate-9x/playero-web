@@ -1,0 +1,11 @@
+title: Architecture
+description: Django apps, models, URLs, templates and static assets
+sections:
+  - module: notes
+    options:
+      file: architecture.md
+  - module: commit-timeline
+    title: Recent changes to the app
+    options:
+      path: restaurante/
+      limit: 10

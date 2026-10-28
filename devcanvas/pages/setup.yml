@@ -1,0 +1,6 @@
+title: Setup
+description: How to run the project locally and what to know about its configuration
+sections:
+  - module: notes
+    options:
+      file: setup.md

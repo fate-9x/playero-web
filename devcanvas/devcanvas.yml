@@ -1,0 +1,4 @@
+version: 1
+name: Playero Web
+description: Django website with the digital menu of the El Playero restaurant and an admin panel to manage dishes
+pages: [overview, architecture, setup]

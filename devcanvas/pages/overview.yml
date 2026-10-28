@@ -1,0 +1,26 @@
+title: Overview
+description: Recent activity and branches of playero-web
+sections:
+  - module: commit-timeline
+    title: Latest commits
+    width: half
+    options:
+      limit: 15
+  - module: branches
+    width: half
+  - module: notes
+    title: About the project
+    options:
+      content: |
+        **Playero Web** is a small Django 6 site for the *El Playero* restaurant.
+        It serves a single public page, the digital menu, and a customized Django
+        admin where staff manage categories and dishes.
+
+        - **Public site:** `/` renders the menu: a carousel of featured dishes and
+          the available dishes grouped by category.
+        - **Admin:** `/admin/` with a live dish preview and an image cropper.
+        - **Stack:** Django 6.0, SQLite, Pillow, python-decouple; Bootstrap 5
+          and Cropper.js loaded from CDNs.
+        - **Single app:** `restaurante`, with two models: `Categoria` and `Plato`.
+
+        See the *Architecture* and *Setup* pages for details.
