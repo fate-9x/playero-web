@@ -1,4 +1,18 @@
 version: 1
 name: Playero Web
 description: Django website with the digital menu of the El Playero restaurant and an admin panel to manage dishes
-pages: [overview, architecture, setup]
+pages: [overview, preview, architecture, setup]
+preview:
+  image: python:3.13-slim
+  install: pip install -r requirements.txt
+  # ALLOWED_HOSTS is hardcoded in playero/settings.py and cannot be set from the
+  # environment, so the container writes a throwaway settings module that allows any host.
+  start: |-
+    printf 'from playero.settings import *\nALLOWED_HOSTS = ["*"]\n' > preview_settings.py
+    python manage.py migrate --noinput
+    exec python manage.py runserver 0.0.0.0:8000 --noreload
+  port: 8000
+  env:
+    DJANGO_SETTINGS_MODULE: preview_settings
+    DEBUG: "True"
+    SECRET_KEY: preview-only-insecure-key
