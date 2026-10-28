@@ -7,10 +7,14 @@ preview:
   install: pip install -r requirements.txt
   # ALLOWED_HOSTS is hardcoded in playero/settings.py and cannot be set from the
   # environment, so the container writes a throwaway settings module that allows any host.
-  start: |-
+  setup: |-
     printf 'from playero.settings import *\nALLOWED_HOSTS = ["*"]\n' > preview_settings.py
     python manage.py migrate --noinput
-    exec python manage.py runserver 0.0.0.0:8000 --noreload
+  seed:
+    type: django
+    files: [seed/menu.json]
+    placeholder_images: true
+  start: python manage.py runserver 0.0.0.0:8000 --noreload
   port: 8000
   env:
     DJANGO_SETTINGS_MODULE: preview_settings
